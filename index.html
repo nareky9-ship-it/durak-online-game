@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071d18"><meta name="description" content="Play Durak Online with friends.">
+  <title>Durak Online — The Table Is Yours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">♠</span><span>DURAK<span class="brand-light">ONLINE</span><small>THE TABLE IS YOURS</small></span></a>
+  <div class="top-right"><span class="online-dot"></span><span id="onlineLabel">LIVE TABLES</span><div class="coin-pill">◈ <b id="coinCount">1,000</b></div><button class="avatar-button" id="profileBtn">🦊</button></div>
+</header>
+<main>
+  <section id="homeScreen" class="screen active">
+    <div class="hero">
+      <div class="eyebrow"><span></span> THE CLASSIC. REIMAGINED.</div>
+      <h1>One table.<br><em>Infinite stories.</em></h1>
+      <p class="hero-copy">Challenge friends, bluff your way to victory, or prove you're the sharpest player at the table.</p>
+      <div class="hero-actions"><button class="btn btn-gold" id="createBtn">＋ Create a game <span>→</span></button><button class="btn btn-ghost" id="quickJoinBtn">Quick play</button></div>
+      <div class="hero-stats"><div><b>02–06</b><span>CLASSIC DECKS</span></div><i></i><div><b>02</b><span>GAME MODES</span></div><i></i><div><b>∞</b><span>REMATCHES</span></div></div>
+    </div>
+    <section class="lobby-section">
+      <div class="section-heading"><div><div class="eyebrow">FIND YOUR TABLE</div><h2>Public lobby <span class="live-tag">LIVE</span></h2></div><button class="text-button" id="refreshBtn">↻ Refresh</button></div>
+      <div id="roomList" class="room-list"><div class="empty-state"><div class="empty-icon">♧</div><b>Looking for open tables…</b><span>Public games will appear here.</span></div></div>
+      <div class="join-strip"><div><b>Have an invite code?</b><span>Enter a friend's private room.</span></div><div class="join-controls"><input id="joinCode" maxlength="6" placeholder="ROOM CODE" autocomplete="off"><button class="btn btn-small btn-outline" id="joinBtn">Join room →</button></div></div>
+    </section>
+  </section>
+
+  <section id="gameScreen" class="screen">
+    <div class="game-topline"><button class="text-button" id="leaveBtn">← Lobby</button><div class="room-code">ROOM <b id="roomCodeDisplay">------</b> <button id="copyCode" title="Copy room code">▢</button></div><div class="mode-chip" id="modeChip">FAIR MODE</div></div>
+    <div class="table-shell">
+      <div class="opponent-area"><div class="player-info" id="opponentInfo"><div class="player-avatar">🐼</div><div><b>Waiting for player…</b><span>OPPONENT · 0 CARDS</span></div><div class="turn-clock" id="clock">45</div></div><div class="opponent-hand" id="opponentHand"></div></div>
+      <div class="felt-table">
+        <div class="table-ornament">DURAK <span>✦</span> CLUB</div>
+        <div class="table-status" id="tableStatus">Waiting for an opponent…</div>
+        <div class="play-area"><div class="deck-stack" id="deckStack"><div class="deck-back"></div><span id="deckCount">36</span></div><div class="trump-card" id="trumpCard"></div><div class="played-cards" id="playedCards"><div class="table-empty">Your next move<br>starts the story.</div></div></div>
+        <div class="table-footer"><span>♠ ♥ ♦ ♣</span><span id="tableHint">Waiting for players</span><span>♣ ♦ ♥ ♠</span></div>
+      </div>
+      <div class="self-area"><div class="self-info" id="selfInfo"><div class="player-avatar">🦊</div><div><b>You</b><span>YOUR HAND · 0 CARDS</span></div><span class="you-tag">YOU</span></div><div class="hand-area" id="myHand"></div></div>
+    </div>
+    <div class="game-controls"><div class="control-left"><button class="btn btn-outline" id="pickupBtn">Pick up cards</button><button class="btn btn-ghost" id="passBtn">Pass / End attack</button></div><div class="reaction-bar"><button data-emoji="😂">😂</button><button data-emoji="😎">😎</button><button data-emoji="🤥">🤥</button><button data-emoji="😱">😱</button><button data-emoji="👏">👏</button><button data-emoji="🔥">🔥</button></div></div>
+    <div class="game-message" id="gameMessage">Welcome to the table.</div>
+    <div class="finished-panel hidden" id="finishedPanel"><div class="winner-crown">♛</div><h2 id="finishTitle">Game over</h2><p id="finishText"></p><button class="btn btn-gold" id="rematchBtn">Play again ↗</button><button class="btn btn-ghost" id="backHomeBtn">Back to lobby</button></div>
+  </section>
+</main>
+
+<div class="modal-backdrop hidden" id="createModal"><div class="modal">
+  <button class="modal-close" data-close="createModal">×</button><div class="eyebrow">SET THE RULES</div><h2>Create your table</h2><p class="modal-sub">Make it your game. Invite a friend or open the doors.</p>
+  <label>ROOM PRIVACY</label><div class="segmented"><button class="selected" data-privacy="public">🌍 Public</button><button data-privacy="private">🔒 Private</button></div>
+  <label>DECK SIZE</label><select id="deckSize"><option value="36">36 cards · Classic</option><option value="52">52 cards · Extended</option><option value="24">24 cards · Quick</option><option value="16">16 cards · Face cards</option><option value="14">14 cards · Mini deck</option></select>
+  <label>GAME MODE</label><div class="mode-options"><button class="mode-option selected" data-mode="fair"><span>⚖️</span><b>Fair Game</b><small>Classic rules. Pure skill.</small></button><button class="mode-option" data-mode="liar"><span>🤥</span><b>Liar Mode</b><small>Bluff. Catch. Survive.</small></button></div>
+  <label>VIRTUAL STAKE <span class="muted-label">FREE PLAY CHIPS</span></label><div class="stake-wrap"><span>◈</span><input id="betAmount" type="number" min="0" max="10000" value="50"><span>CHIPS</span></div>
+  <button class="btn btn-gold full-btn" id="confirmCreate">Create table <span>→</span></button><p class="fine-print">No real money. Just friendly competition.</p>
+</div></div>
+
+<div class="modal-backdrop hidden" id="profileModal"><div class="modal profile-modal">
+  <button class="modal-close" data-close="profileModal">×</button><div class="eyebrow">YOUR IDENTITY</div><h2>Player profile</h2><label>DISPLAY NAME</label><input id="playerName" maxlength="18" value="Player">
+  <label>CHOOSE YOUR AVATAR</label><div class="avatar-picker"><button>🦊</button><button>🐼</button><button>🐯</button><button>🐸</button><button>🐺</button><button>🦁</button><button>🐙</button><button>🐲</button></div>
+  <button class="btn btn-gold full-btn" id="saveProfile">Save profile ✓</button>
+</div></div>
+<div class="toast" id="toast"></div><div class="reaction-float" id="reactionFloat"></div>
+<script src="/socket.io/socket.io.js"></script><script src="/client.js"></script>
+</body></html>
